@@ -1,0 +1,32 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+# Step 1: Sample traffic data
+data = {
+    'hour': [6, 7, 8, 9, 10, 16, 17, 18, 19, 20],
+    'temperature': [20, 21, 22, 23, 24, 25, 26, 25, 24, 22],
+    'weather': [0, 0, 1, 1, 0, 2, 2, 2, 1, 0],  # 0 = Clear, 1 = Cloudy, 2 = Rainy
+    'traffic_volume': [300, 600, 1000, 950, 500, 850, 1100, 1000, 700, 400]
+}
+df = pd.DataFrame(data)
+# Step 2: Define features and target
+X = df[['hour', 'temperature', 'weather']]
+y = df['traffic_volume']
+# Step 3: Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Step 4: Train the model
+model = LinearRegression()
+model.fit(X_train, y_train)
+# Step 5: Predict on test data
+y_pred = model.predict(X_test)
+# Step 6: Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+print("? Model Evaluation:")
+print("Mean Squared Error:", round(mse, 2))
+print("R^2 Score:", round(r2, 2))
+# Step 7: Predict traffic for a custom input
+custom_input = pd.DataFrame({'hour': [8], 'temperature': [22], 'weather': [1]})
+predicted_volume = model.predict(custom_input)[0]
+print("\n?? Predicted Traffic Volume at 8AM, 22°C, Cloudy:", int(predicted_volume), "vehicles/hour")
