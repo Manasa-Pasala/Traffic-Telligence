@@ -1,1 +1,7 @@
-
+{
+  "0": "Low Traffic",
+  "1": "Medium Traffic",
+  "2": "Heavy Traffic",
+  "3": "Congestion",
+  "4": "Accident"
+}
