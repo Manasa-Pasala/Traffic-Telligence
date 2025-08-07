@@ -14,7 +14,7 @@ Traffic Telligence is a smart traffic image classification system using Machine 
 3. Open browser: http://localhost:5000/
 
 ## Folder Structure
-(```)
+```
 app.py - Flask web app
 predict.py - Prediction logic
 TrainModel.py - Model training (placeholder)
